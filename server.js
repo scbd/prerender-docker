@@ -18,7 +18,7 @@ const server = prerender(options);
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
-server.use(prerender.removeScriptTags());
+// server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
 
