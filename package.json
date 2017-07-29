@@ -6,9 +6,9 @@
   "dependencies": {
     "aws-sdk": "2.4.12",
     "cache-manager": "2.1.2",
+    "cheerio": "^1.0.0-rc.2",
     "html-minifier": "3.2.3",
-    "prerender": "4.4.1",
-    "cheerio": "^1.0.0-rc.1"
+    "prerender": "4.4.1"
   },
   "devDependencies": {},
   "scripts": {
