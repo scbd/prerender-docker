@@ -9,7 +9,11 @@ const options = {
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
 	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 10,
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
-	jsCheckTimeout : 600,
+	jsCheckTimeout : 10000,
+	resourceDownloadTimeout: 20000,
+	waitAfterLastRequest: 2000,
+	logRequests: true,
+
 };
 console.log('Starting with options:', options);
 
@@ -18,9 +22,10 @@ const server = prerender(options);
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
-// server.use(prerender.removeScriptTags());
+server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
+server.use(prerender.s3HtmlCache());
 
 server.start();
 

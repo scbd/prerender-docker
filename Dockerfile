@@ -16,6 +16,9 @@ RUN chown prerender:prerender /usr/src/app
 USER prerender
 WORKDIR /usr/src/app
 
+ENV AWS_ACCESS_KEY_ID /run/secrets/AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY /run/secrets/AWS_SECRET_ACCESS_KEY
+
 COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
