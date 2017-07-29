@@ -19,26 +19,26 @@ module.exports = {
 			return next();
 		}
 		var $ = cheerio.load(req.prerender.documentHTML);
-
+		var host = 'https://'+req.headers.host;
 		var as = $('a');
     var links = $('link');
     var imgs = $('img');
-
+		//
 		$(links).each(function(i, link){
 			 var href = $(this).attr('href');
-			 href=req.get('Host')+href;
+			 href=host+href;
 			 $(this).attr('href',href);
 		   console.log($(this).attr('href'));
   	});
 		$(as).each(function(i, link){
 			 var href = $(this).attr('href');
-			 href=req.get('Host')+href;
+			 href=host+href;
 			 $(this).attr('href',href);
 		   console.log($(this).attr('href'));
   	});
 		$(imgs).each(function(i, link){
 			 var href = $(this).attr('src');
-			 href=req.get('Host')+href;
+			 href=host+href;
 			 $(this).attr('src',href);
 		   console.log($(this).attr('src'));
   	});
