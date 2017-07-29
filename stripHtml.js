@@ -1,5 +1,5 @@
 const minify = require('html-minifier').minify;
-const cherio = require('cheerio');
+const cheerio = require('cheerio');
 
 const COMPRESSION_HEADER = 'X-Prerender-Compression-Ratio';
 const options = {
