@@ -1,5 +1,4 @@
 const prerender = require('prerender');
-
 const forwardHeaders = require('./forwardHeaders');
 const stripHtml = require('./stripHtml');
 const healthcheck = require('./healthcheck');
