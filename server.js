@@ -8,8 +8,6 @@ const s3 					 		= require('./s3.js');
 process.env.AWS_ACCESS_KEY_ID_DEV=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
 process.env.AWS_SECRET_ACCESS_KEY_DEV=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
 
-console.log(process.env);
-
 const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
@@ -17,8 +15,7 @@ const options = {
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
 	jsCheckTimeout : 10000,
 	resourceDownloadTimeout: 20000,
-	waitAfterLastRequest: 2000,
-	logRequests: true,
+	waitAfterLastRequest: 2000
 };
 
 console.log('Starting with options:', options);

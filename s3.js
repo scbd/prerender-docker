@@ -19,7 +19,7 @@ module.exports = {
                 console.log('cache hit');
                 return res.send(200, result.Body);
             }
-
+console.log('cache: no hit on: '+req.prerender.url);
             next();
         });
     },
@@ -31,6 +31,7 @@ module.exports = {
 
         this.cache.set(req.prerender.url, req.prerender.documentHTML, function(err, result) {
             if (err) console.error(err);
+            console.log('cache: caching: '+req.prerender.url);
             next();
         });
 
@@ -43,7 +44,7 @@ var s3_cache = {
         if (process.env.S3_PREFIX_KEY) {
             key = process.env.S3_PREFIX_KEY + '/' + key;
         }
-
+console.log('Cache S3 Get: '+key;
         s3.getObject({
             Key: key
         }, callback);
@@ -52,7 +53,7 @@ var s3_cache = {
         if (process.env.S3_PREFIX_KEY) {
             key = process.env.S3_PREFIX_KEY + '/' + key;
         }
-
+console.log('Cache S3 put: '+key);
         var request = s3.putObject({
             Key: key,
             ContentType: 'text/html;charset=UTF-8',
