@@ -10,6 +10,7 @@ const options = {
 	preserveLineBreaks : true,
 	removeEmptyAttributes : false,
 	removeEmptyElements : false,
+	html5:true
 };
 
 module.exports = {
