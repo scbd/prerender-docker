@@ -1,6 +1,6 @@
 var cacheManager = require('cache-manager');
 var s3 = new (require('aws-sdk')).S3({params:{Bucket: process.env.S3_BUCKET_NAME}});
-const gzip = zlib.createGzip();
+// const gzip = zlib.createGzip();
 
 module.exports = {
     init: function() {
@@ -55,7 +55,7 @@ console.log('Cache S3 Get: '+key);
             key = process.env.S3_PREFIX_KEY + '/' + key;
         }
 console.log('Cache S3 put: '+key);
-        value = zlib.gunzipSync(value);
+        // value = zlib.gunzipSync(value);
         var request = s3.putObject({
             Key: key,
             ContentType: 'text/html;charset=UTF-8',
