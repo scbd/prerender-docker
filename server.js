@@ -12,8 +12,8 @@ const options = {
 	resourceDownloadTimeout: 20000,
 	waitAfterLastRequest: 2000,
 	logRequests: true,
-
 };
+
 console.log('Starting with options:', options);
 
 const server = prerender(options);
