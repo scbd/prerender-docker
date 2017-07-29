@@ -4,6 +4,8 @@
   "description": "Dockerfile to build the prerender container image",
   "main": "server.js",
   "dependencies": {
+    "aws-sdk": "^2.4.12",
+"cache-manager": "^2.1.2",
     "html-minifier": "^3.2.3",
     "prerender": "4.4.1"
   },
