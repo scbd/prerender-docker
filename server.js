@@ -2,6 +2,11 @@ const prerender = require('prerender');
 const forwardHeaders = require('./forwardHeaders');
 const stripHtml = require('./stripHtml');
 const healthcheck = require('./healthcheck');
+const fs      = require('fs');
+
+
+process.env.AWS_ACCESS_KEY_ID_DEV=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
+process.env.AWS_SECRET_ACCESS_KEY_DEV=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
 
 const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
