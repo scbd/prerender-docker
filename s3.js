@@ -63,7 +63,7 @@ var s3_cache = {
             StorageClass: 'REDUCED_REDUNDANCY',
             ContentEncoding: 'gzip',
             CacheControl:'public',
-            Expires: 'Wed, 01 Jan 2025 08:00:00 GMT',
+            Expires: '1911678603',
             Body: value
         }, callback);
 
