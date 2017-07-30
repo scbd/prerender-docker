@@ -61,6 +61,8 @@ console.log('Cache S3 put: '+key);
             ContentType: 'text/html;charset=UTF-8',
             StorageClass: 'REDUCED_REDUNDANCY',
             ContentEncoding: 'gzip',
+            CacheControl:'public',
+            Expires: 'Wed, 01 Jan 2025 08:00:00 GMT',
             Body: value
         }, callback);
 
