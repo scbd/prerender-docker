@@ -9,9 +9,8 @@ const options = {
 	removeComments : true,
 	collapseWhitespace : true,
 	preserveLineBreaks : true,
-	removeEmptyAttributes : false,
-	removeEmptyElements : false,
-	html5:true
+	removeEmptyAttributes : true,
+	removeEmptyElements : true
 };
 
 module.exports = {
@@ -31,12 +30,13 @@ module.exports = {
 		$(links).each(function(i, link){
 
 			 var href = $(this).attr('href');
-			console.log(urlParse(href).host);
+			console.log(!!(urlParse(href).host));
 			 if(!urlParse(href).host){
-					 href=host+href;
+				   if(href) href=host+href;
+					 else     href=host;
 					 $(this).attr('href',href);
 		 		}
-		  //  console.log($(this).attr('href'));
+		    console.log($(this).attr('href'));
   	});
 
 		$(as).each(function(i, link){
@@ -44,10 +44,11 @@ module.exports = {
 			 var href = $(this).attr('href');
 
 			 if(!urlParse(href).host){
-					 href=host+href;
+				 if(href) href=host+href;
+				 else     href=host;
 					 $(this).attr('href',href);
 		 		}
-		  //  console.log($(this).attr('href'));
+		   console.log($(this).attr('href'));
   	});
 
 		$(imgs).each(function(i, link){
@@ -55,20 +56,25 @@ module.exports = {
 			 var href = $(this).attr('src');
 
 			 if(!urlParse(href).host){
-					 href=host+'/'+href;
+				   if(urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
+					 		href = '/'+href;
+
+					 href=host+href;
 					 $(this).attr('src',href);
 				}
-		  //  console.log($(this).attr('src'));
+		    console.log($(this).attr('src'));
   	});
 		$(imgs).each(function(i, link){
 
 			 var href = $(this).attr('ng-src');
 
 			 if(!urlParse(href).host){
-					 href=host+'/'+href;
+				 if(urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
+						href = '/'+href;
+					 href=host+href;
 					 $(this).attr('ng-src',href);
 				}
-		  //  console.log($(this).attr('src'));
+		   console.log($(this).attr('ng-src'));
   	});
 		var doc = $.html();
 		const sizeBefore = doc.toString().length;
