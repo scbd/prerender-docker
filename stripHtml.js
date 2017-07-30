@@ -59,6 +59,8 @@ module.exports = {
 				   if(urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
 					 		href = '/'+href;
 
+						if(href) href=host+href;
+						else     href=host;
 					 href=host+href;
 					 $(this).attr('src',href);
 				}
@@ -71,7 +73,10 @@ module.exports = {
 			 if(!urlParse(href).host){
 				 if(urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
 						href = '/'+href;
-					 href=host+href;
+
+					if(href) href=host+href;
+					else     href=host;
+
 					 $(this).attr('ng-src',href);
 				}
 		   console.log($(this).attr('ng-src'));
