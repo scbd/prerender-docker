@@ -30,7 +30,7 @@ module.exports = {
 		$(links).each(function(i, link){
 
 			 var href = $(this).attr('href');
-			console.log(!!(urlParse(href).host));
+
 			 if(!urlParse(href).host){
 				 	 if(href && urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
 						 href = '/'+href;
@@ -39,7 +39,6 @@ module.exports = {
 					 else     href=host;
 					 $(this).attr('href',href);
 		 		}
-		    console.log($(this).attr('href'));
   	});
 
 		$(as).each(function(i, link){
@@ -54,7 +53,6 @@ module.exports = {
 				 else     href=host;
 				$(this).attr('href',href);
 		 		}
-		   console.log($(this).attr('href'));
   	});
 		$(as).each(function(i, link){
 
@@ -69,7 +67,6 @@ module.exports = {
 
 				$(this).attr('ng-href',href);
 		 		}
-		   console.log($(this).attr('ng-href'));
   	});
 		$(imgs).each(function(i, link){
 
@@ -84,7 +81,7 @@ module.exports = {
 
 					 $(this).attr('src',href);
 				}
-		    console.log($(this).attr('src'));
+
   	});
 		$(imgs).each(function(i, link){
 
@@ -99,9 +96,8 @@ module.exports = {
 
 					 $(this).attr('ng-src',href);
 				}
-		   console.log($(this).attr('ng-src'));
   	});
-		
+
 		var doc = $.html();
 		const sizeBefore = doc.toString().length;
 		req.prerender.documentHTML = minify(doc.toString(), options);

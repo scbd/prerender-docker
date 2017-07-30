@@ -1,5 +1,6 @@
 var cacheManager = require('cache-manager');
 var s3 = new (require('aws-sdk')).S3({params:{Bucket: process.env.S3_BUCKET_NAME}});
+
 // const gzip = zlib.createGzip();
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
                 console.log('cache hit');
                 return res.send(200, result.Body);
             }
-console.log('cache: no hit on: '+req.prerender.url);
+            console.log('cache: no hit on: '+req.prerender.url);
             next();
         });
     },
@@ -32,7 +33,7 @@ console.log('cache: no hit on: '+req.prerender.url);
 
         this.cache.set(req.prerender.url, req.prerender.documentHTML, function(err, result) {
             if (err) console.error(err);
-console.log('cache: caching: '+req.prerender.url);
+            console.log('cache: caching: '+req.prerender.url);
             next();
         });
 
@@ -45,7 +46,7 @@ var s3_cache = {
         if (process.env.S3_PREFIX_KEY) {
             key = process.env.S3_PREFIX_KEY + '/' + key;
         }
-console.log('Cache S3 Get: '+key);
+        console.log('Cache S3 Get: '+key);
         s3.getObject({
             Key: key
         }, callback);
@@ -54,7 +55,7 @@ console.log('Cache S3 Get: '+key);
         if (process.env.S3_PREFIX_KEY) {
             key = process.env.S3_PREFIX_KEY + '/' + key;
         }
-console.log('Cache S3 put: '+key);
+        console.log('Cache S3 put: '+key);
         // value = zlib.gunzipSync(value);
         var request = s3.putObject({
             Key: key,

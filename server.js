@@ -31,8 +31,8 @@ server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
-server.use(stripHtml);
 server.use(s3);
+server.use(stripHtml);
 
 server.start();
 
