@@ -56,21 +56,21 @@ module.exports = {
 		 		}
 		   console.log($(this).attr('href'));
   	});
-		$(as).each(function(i, link){
-
-			 var href = $(this).attr('ng-href');
-
-			 if(!urlParse(href).host){
-				 if(href && urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
-						href = '/'+href;
-
-				 if(href && href!='undefined') href=host+href;
-				 else     href=host;
-
-				$(this).attr('ng-href',href);
-		 		}
-		   console.log($(this).attr('ng-href'));
-  	});
+		// $(as).each(function(i, link){
+		//
+		// 	 var href = $(this).attr('ng-href');
+		//
+		// 	 if(!urlParse(href).host){
+		// 		 if(href && urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
+		// 				href = '/'+href;
+		//
+		// 		 if(href && href!='undefined') href=host+href;
+		// 		 else     href=host;
+		//
+		// 		$(this).attr('ng-href',href);
+		//  		}
+		//    console.log($(this).attr('ng-href'));
+  	// });
 		$(imgs).each(function(i, link){
 
 			 var href = $(this).attr('src');
@@ -86,21 +86,21 @@ module.exports = {
 				}
 		    console.log($(this).attr('src'));
   	});
-		$(imgs).each(function(i, link){
-
-			 var href = $(this).attr('ng-src');
-
-			 if(!urlParse(href).host){
-				 if(href && urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
-						href = '/'+href;
-
-					if(href && href!='undefined') href=host+href;
-					else     href=host;
-
-					 $(this).attr('ng-src',href);
-				}
-		   console.log($(this).attr('ng-src'));
-  	});
+		// $(imgs).each(function(i, link){
+		//
+		// 	 var href = $(this).attr('ng-src');
+		//
+		// 	 if(!urlParse(href).host){
+		// 		 if(href && urlParse(href).pathname && urlParse(href).pathname.charAt(0)!='/')
+		// 				href = '/'+href;
+		//
+		// 			if(href && href!='undefined') href=host+href;
+		// 			else     href=host;
+		//
+		// 			 $(this).attr('ng-src',href);
+		// 		}
+		//    console.log($(this).attr('ng-src'));
+  	// });
 		var doc = $.html();
 		const sizeBefore = doc.toString().length;
 		req.prerender.documentHTML = minify(doc.toString(), options);
