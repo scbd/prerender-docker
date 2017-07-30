@@ -5,9 +5,14 @@ const healthcheck 		= require('./healthcheck');
 const fs      				= require('fs');
 const s3 					 		= require('./s3.js');
 
-process.env.AWS_ACCESS_KEY_ID_DEV=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
-process.env.AWS_SECRET_ACCESS_KEY_DEV=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
-
+if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID_DEV'))
+	process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
+if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY_DEV'))
+	process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
+	if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID'))
+		process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID', "utf8" );
+	if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY'))	
+		process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY', "utf8" );
 
 const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
@@ -31,8 +36,8 @@ server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
-server.use(s3);
 server.use(stripHtml);
+server.use(s3);
 
 server.start();
 
