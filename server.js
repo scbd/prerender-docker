@@ -5,8 +5,9 @@ const healthcheck 		= require('./healthcheck');
 const fs      				= require('fs');
 const s3 					 		= require('./s3.js');
 
-process.env.AWS_ACCESS_KEY_ID_DEV=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
-process.env.AWS_SECRET_ACCESS_KEY_DEV=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
+process.env.AWS_ACCESS_KEY_ID_DEV='KIAILEAUWKDTJVV537A';//fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
+process.env.AWS_SECRET_ACCESS_KEY_DEV='T3dx4iZ1aVpNwfwLmkeF5VFlUcovwW6zXaeIyCOr';//fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
+process.env.S3_BUCKET_NAME = 'houlahan.ca/prerender-cache';
 
 const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
@@ -15,7 +16,11 @@ const options = {
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
 	jsCheckTimeout : 10000,
 	resourceDownloadTimeout: 20000,
-	waitAfterLastRequest: 2000
+	waitAfterLastRequest: 2000,
+	resourceDownloadTimeout: 20000,
+	waitAfterLastRequest: 2000,
+	logRequests: false
+
 };
 
 console.log('Starting with options:', options);

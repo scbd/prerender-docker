@@ -1,5 +1,6 @@
 const minify = require('html-minifier').minify;
 const cheerio = require('cheerio');
+const urlParse = require('url-parse');
 
 const COMPRESSION_HEADER = 'X-Prerender-Compression-Ratio';
 const options = {
@@ -18,29 +19,56 @@ module.exports = {
 		if (!req.prerender.documentHTML) {
 			return next();
 		}
+		//console.log(req);
 		var $ = cheerio.load(req.prerender.documentHTML);
-		var host = 'https://'+req.headers.host;
+
+		var host = urlParse(req.prerender.url).protocol+'/'+ urlParse(req.prerender.url).host;
+
 		var as = $('a');
     var links = $('link');
     var imgs = $('img');
 		//
 		$(links).each(function(i, link){
+
 			 var href = $(this).attr('href');
-			 href=host+href;
-			 $(this).attr('href',href);
-		   console.log($(this).attr('href'));
+			console.log(urlParse(href).host);
+			 if(!urlParse(href).host){
+					 href=host+href;
+					 $(this).attr('href',href);
+		 		}
+		  //  console.log($(this).attr('href'));
   	});
+
 		$(as).each(function(i, link){
+
 			 var href = $(this).attr('href');
-			 href=host+href;
-			 $(this).attr('href',href);
-		   console.log($(this).attr('href'));
+
+			 if(!urlParse(href).host){
+					 href=host+href;
+					 $(this).attr('href',href);
+		 		}
+		  //  console.log($(this).attr('href'));
+  	});
+
+		$(imgs).each(function(i, link){
+
+			 var href = $(this).attr('src');
+
+			 if(!urlParse(href).host){
+					 href=host+'/'+href;
+					 $(this).attr('src',href);
+				}
+		  //  console.log($(this).attr('src'));
   	});
 		$(imgs).each(function(i, link){
-			 var href = $(this).attr('src');
-			 href=host+href;
-			 $(this).attr('src',href);
-		   console.log($(this).attr('src'));
+
+			 var href = $(this).attr('ng-src');
+
+			 if(!urlParse(href).host){
+					 href=host+'/'+href;
+					 $(this).attr('ng-src',href);
+				}
+		  //  console.log($(this).attr('src'));
   	});
 		var doc = $.html();
 		const sizeBefore = doc.toString().length;
