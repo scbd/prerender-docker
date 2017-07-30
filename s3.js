@@ -63,7 +63,6 @@ var s3_cache = {
             StorageClass: 'REDUCED_REDUNDANCY',
             ContentEncoding: 'gzip',
             CacheControl:'public',
-            Expires: new Date(new Date().setFullYear(new Date().getFullYear() + 5)),
             Body: value
         }, callback);
 
