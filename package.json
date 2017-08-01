@@ -4,12 +4,15 @@
   "description": "Dockerfile to build the prerender container image",
   "main": "server.js",
   "dependencies": {
-    "html-minifier": "^3.2.3",
-    "prerender": "4.4.1"
+    "aws-sdk": "2.4.12",
+    "cache-manager": "2.1.2",
+    "cheerio": "^1.0.0-rc.2",
+    "html-minifier": "3.2.3",
+    "prerender": "4.4.1",
+    "url-parse": "^1.1.9"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "license": "MIT"

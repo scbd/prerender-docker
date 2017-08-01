@@ -1,16 +1,32 @@
-const prerender = require('prerender');
+const prerender 			= require('prerender');
+const forwardHeaders 	= require('./forwardHeaders');
+const stripHtml 			= require('./stripHtml');
+const healthcheck 		= require('./healthcheck');
+const fs      				= require('fs');
+const s3 					 		= require('./s3.js');
 
-const forwardHeaders = require('./forwardHeaders');
-const stripHtml = require('./stripHtml');
-const healthcheck = require('./healthcheck');
+if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID_DEV'))
+	process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
+if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY_DEV'))
+	process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
+	if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID'))
+		process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID', "utf8" );
+	if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY'))	
+		process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY', "utf8" );
 
 const options = {
-	workers : process.env.PRERENDER_NUM_WORKERS || 4,
+	workers : process.env.PRERENDER_NUM_WORKERS || 1,
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
 	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 10,
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
-	jsCheckTimeout : 600,
+	jsCheckTimeout : 10000,
+	resourceDownloadTimeout: 20000,
+	waitAfterLastRequest: 2000,
+	resourceDownloadTimeout: 20000,
+	waitAfterLastRequest: 2000,
+	logRequests: false
 };
+
 console.log('Starting with options:', options);
 
 const server = prerender(options);
@@ -18,9 +34,10 @@ const server = prerender(options);
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
-// server.use(prerender.removeScriptTags());
+server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
+server.use(s3);
 
 server.start();
 
