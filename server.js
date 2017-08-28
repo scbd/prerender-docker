@@ -5,14 +5,20 @@ const healthcheck 		= require('./healthcheck');
 const fs      				= require('fs');
 const s3 					 		= require('./s3.js');
 
-if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID_DEV'))
-	process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID_DEV', "utf8" );
-if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY_DEV'))
-	process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY_DEV', "utf8" );
-	if(fs.existsSync('/run/secrets/AWS_ACCESS_KEY_ID'))
-		process.env.AWS_ACCESS_KEY_ID=fs.readFileSync( '/run/secrets/AWS_ACCESS_KEY_ID', "utf8" );
-	if(fs.existsSync('/run/secrets/AWS_SECRET_ACCESS_KEY'))	
-		process.env.AWS_SECRET_ACCESS_KEY=fs.readFileSync( '/run/secrets/AWS_SECRET_ACCESS_KEY', "utf8" );
+let file;
+if(fs.existsSync(path.join(process.env.HOME, 'config.json')))
+    file = path.join(process.env.HOME, 'config.json');
+
+let config = file ? require(file) : '';
+
+if(config)
+	config.AWS                   = config.awsAccessKeys ? config.awsAccessKeys.global : '';
+
+if(config.AWS){
+	process.env.AWS_ACCESS_KEY_ID= config.AWS.accessKeyId;
+	process.env.AWS_SECRET_ACCESS_KEY= config.AWS.secretAccessKey;
+}
+
 
 const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
