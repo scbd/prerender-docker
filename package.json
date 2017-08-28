@@ -1,5 +1,5 @@
 {
-  "name": "scbd/prerender-docker",
+  "name": "scbd-prerender-docker",
   "version": "0.1",
   "description": "Dockerfile to build the prerender container image",
   "main": "server.js",
