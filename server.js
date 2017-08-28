@@ -50,7 +50,7 @@ server.start();
 const shutdown = () => {
 	console.log('Shutdown initiated');
 	server.exit();
-	// At this point prerender has started killing its phantom workers already.
+	// At this point prerender has started killing its phantom workers already.  
 	// We give it 5 seconds to quickly do so, and then halt the process. This
 	// will ensure relatively rapid redeploys (prerender no longer accepts new
 	// requests at this point
