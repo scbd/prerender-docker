@@ -1,5 +1,5 @@
 FROM node:7
-MAINTAINER Magnet.me
+MAINTAINER scbd
 
 EXPOSE 3000
 
