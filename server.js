@@ -6,7 +6,7 @@ const fs      				= require('fs');
 const s3 					 		= require('./s3.js');
 
 let file;
-if(fs.existsSync(path.join(process.env.HOME, 'config.json')))
+if(fs.existsSync(process.env.HOME+'/'+'config.json'))
     file = process.env.HOME+'/'+'config.json';
     console.log(file);
 
