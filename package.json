@@ -14,5 +14,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "repository": "scbd/prerender-docker"
 }
