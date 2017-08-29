@@ -8,7 +8,13 @@ const s3 					 		= require('./s3.js');
 let file;
 if(fs.existsSync(process.env.HOME+'/'+'config.json'))
     file = process.env.HOME+'/'+'config.json';
-    console.log(file);
+
+console.log('config file: ',file);
+// for local test
+//file='/Users/randyhoulahan/.gaia_config/config-dev.json';
+// process.env.S3_BUCKET_NAME='pre-render-cache';
+// console.log(file);
+
 
 let config = file ? require(file) : '';
 
