@@ -4,7 +4,7 @@ const stripHtml 	    = require('./stripHtml');
 const healthcheck 		= require('./healthcheck');
 const fs      			= require('fs');
 const s3 				= require('./s3.js');
-const whitelist 		= require('./whitelist');
+// const whitelist 		= require('./whitelist');
 
 let file;
 if(fs.existsSync(process.env.CONFIG_FILE))
@@ -48,7 +48,7 @@ const server = prerender(options);
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
-server.use(whitelist());
+// server.use(whitelist());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
