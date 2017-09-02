@@ -100,7 +100,7 @@ module.exports = {
 
 		var doc = $.html();
 		const sizeBefore = doc.toString().length;
-		req.prerender.documentHTML = minify(doc.toString(), options);
+		req.prerender.documentHTML = doc.toString();//minify(doc.toString(), options);
 		const sizeAfter = req.prerender.documentHTML.toString().length;
 
 		res.setHeader(COMPRESSION_HEADER, ((sizeBefore - sizeAfter) / sizeBefore).toFixed(4));

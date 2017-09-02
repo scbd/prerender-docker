@@ -61,7 +61,6 @@ var s3_cache = {
             Key: key,
             ContentType: 'text/html;charset=UTF-8',
             StorageClass: 'REDUCED_REDUNDANCY',
-            ContentEncoding: 'gzip',
             Body: value
         }, callback);
 

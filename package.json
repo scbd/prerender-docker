@@ -1,6 +1,5 @@
 {
-  "name": "scbd/docker-prerender",
-  "version": "0.1",
+  "name": "scbd-prerender-docker",
   "description": "Dockerfile to build the prerender container image",
   "main": "server.js",
   "dependencies": {
@@ -15,5 +14,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "repository": "scbd/prerender-docker"
 }
