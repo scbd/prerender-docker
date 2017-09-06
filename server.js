@@ -38,7 +38,8 @@ const options = {
 	waitAfterLastRequest: 2000,
 	resourceDownloadTimeout: 20000,
 	waitAfterLastRequest: 2000,
-	logRequests: false
+	logRequests: false,
+    port:8000
 };
 
 console.log('Starting with options:', options);
