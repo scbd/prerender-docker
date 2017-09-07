@@ -4,18 +4,11 @@ const stripHtml 	    = require('./stripHtml');
 const healthcheck 		= require('./healthcheck');
 const fs      			= require('fs');
 const s3 				= require('./s3.js');
-// const whitelist 		= require('./whitelist');
+const whitelist 		= require('./whitelist');
 
 let file;
 if(fs.existsSync(process.env.CONFIG_FILE))
     file = process.env.CONFIG_FILE;
-
-console.log('config file: ',file);
-// for local test
-// file='/Users/randyhoulahan/.gaia_config/config-dev.json';
-// process.env.S3_BUCKET_NAME='pre-render-cache';
-// console.log(file);
-
 
 let config = file ? require(file) : '';
 
@@ -49,7 +42,7 @@ const server = prerender(options);
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
 server.use(prerender.sendPrerenderHeader());
-// server.use(whitelist());
+server.use(whitelist);
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
